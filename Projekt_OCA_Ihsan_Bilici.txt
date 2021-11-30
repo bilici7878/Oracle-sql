@@ -1,0 +1,589 @@
+--PROJEKT ARBEIT
+
+--AUFGABE-1)
+
+CREATE USER projekt11 
+   IDENTIFIED BY projekt11
+   DEFAULT TABLESPACE users
+   TEMPORARY TABLESPACE temp
+   QUOTA 20M ON users;
+
+--AUFGABE-2)   
+   --(in system)
+
+CREATE ROLE Orax;
+GRANT CREATE SESSION TO Orax;
+GRANT CREATE TABLE TO Orax;
+GRANT CREATE SEQUENCE TO Orax;
+GRANT CREATE VIEW TO Orax;
+GRANT Orax TO projekt11;
+
+--AUFGABE-3)
+
+--Verbindung wurde erstellt.
+
+
+--AUFGABE-4 und AUFGABE-5)
+--(in Projekt2)
+
+CREATE TABLE Mitglieder
+(
+Memberid Number(6,0) constraint pk_mitglieder primary key,
+Vorname Varchar2(25) Not Null,
+Nachname Varchar2(25) Not Null,
+Strasse Varchar2(40),
+Plz Varchar2(5),
+Ort Varchar2(40)
+);
+
+desc Mitglieder ;
+
+
+CREATE TABLE Buecher
+(
+Bookid Number(8) constraint pk_buecher primary key,
+Titel Varchar2(40) Not Null
+);
+
+desc Buecher;
+
+CREATE TABLE Autoren
+(
+Autorid Number(8) constraint pk_autoren primary key,
+Vorname Varchar2(25),
+Nachname Varchar2(35) Not Null
+);
+
+desc Autoren;
+
+CREATE TABLE Verlage
+(
+Verlagsid Number(8) constraint pk_verlage primary key,
+Verlagsname Varchar2(40) Not Null
+);
+
+desc Verlage;
+
+CREATE TABLE Verleihvorgaenge
+(
+Verleihnr Number(8) constraint pk_verleihvorgaenge primary key,
+Verleihdatum Date,
+Bookid Number(8),
+Memberid Number(8)
+);
+
+desc Verleihvorgaenge;
+
+CREATE TABLE Buch_zu_Autor
+(
+Bookid Number(8) ,
+Autorid Number(8) ,
+constraint pk_buch_zu_autor primary key (bookid,autorid)
+);
+
+desc Buch_zu_Autor;
+
+CREATE TABLE Buch_zu_Verlag
+(
+Bookid Number(8), 
+Verlagsid Number(8),
+constraint pk_buch_zu_verlag primary key (bookid, verlagsid)
+);
+
+desc Buch_zu_Verlag;
+
+--AUFGABE-6)
+
+CREATE SEQUENCE mitgliedseq
+    START WITH 201
+    INCREMENT BY 1
+    NOCACHE;
+
+
+--AUFGABE-7)
+
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT) 
+values (mitgliedseq.nextval,'Maria','Anders','Obere strasse. 57','12209','Berlin');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT) 
+values (mitgliedseq.nextval,'Hanna','Moos','Forsterstr. 57','68306','Mannheim');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Sven','Ottlieb','Walserweg 21','52520','Aachen');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Peter','Franken','Berliner Platz 43','80805','Muenchen');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Philip','Cramer','Maubelstr. 90','14776','Brandenburg');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Renate','Messner','Magazinweg 7','60528','Frankfurt a. M.');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Alexander','Feuer','Heerstr 22','04179','Leipzig');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Henriette','Pfalzheim','Mehrheimerstr. 369','50739','Koeln');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Horst','Kloos','Taucherstraße 10','01307','Cunewalde');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Karin','Josephs','Luisenstr. 48','44087','Muenster');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Rita','Mueller','Danzinger Straße 12','71073','Stuttgart');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Herbert','Mueller','Kraehenweg 4','81347','Muenchen');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Karl','Friesen','Rennweg 23a','70934','Lauben');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Helmut','Werner','Hauptstraße 14','70883','Metzingen');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Renate','Sauer','Maubeerstr. 245','32870','Kleineich');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Josef','Mueller','Westlicher Weg 14','80510','Muenchen');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Vanessa','Geiger','Amselweg 4','81309','Muenchen');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+ values (mitgliedseq.nextval,'Sigrid','Kanter','Forellenstr. 17','60351','Frankfurt a.M.');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Franz','Maler','Hauptstr. 53','93041','Hof');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Gerhard','Reiter','Braunstr. 14','82561','Großmanching');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Karl','Fischer','Strandweg 2','20034','Hamburg');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Maria','Kleinert','Weizenstr. 67','11452','Berlin');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Karl','Jaeger','Alsterstr. 89','20851','Hamburg');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Siegfried','Meister','Auenstr. 145','11743','Berlin');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Adalbert','Koenig','Weiherweg 3','21409','Hamburg');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Rudolf','Plattner','Baerenstr. 67','61308','Frankfurt a.M.');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Herbert','Frenzen','Obermuehle 4','93481','Merten');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Heinz','Hansen','Hochstr. 35','60411','Frankfurt a.M.');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Renate','Schnell','Gaensestr. 23','61423','Melsen');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Reinhard','Schimmel','Hammelweg 14','60432','Frankfurt a.M.');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Lieschen','Mueller','Neue Gasse','79990','Stuttgart');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Rudi','Siegel','Allee 9','70467','Stuttgart');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Anita','Bücher','Momserweg 2','44368','Norderstedt');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Otto','Reichert','Arkadenstr. 14','93688','Würzlingen');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Fred','Feuerstein','Geröllhalde 20','12345','Geröllheim');
+Insert into mitglieder (memberid,VORNAME,nachname,strasse,PLZ,ORT)
+values (mitgliedseq.nextval,'Barny','Geröllheimer','Geröllhalde 20','12345','Geröllheim');
+commit;
+
+select * from mitglieder;
+
+--AUFGABE-8)
+
+INSERT INTO autoren(autorid, vorname, nachname)values ('92','George Bernard','Shaw');
+INSERT INTO autoren(autorid, vorname, nachname)VALUES ('93','Leo','Tolstoy');
+INSERT INTO autoren(autorid, vorname, nachname) values ('94','Percy', 'Shelley');
+INSERT INTO autoren(autorid, vorname, nachname)VALUES ('95','Lord', 'Byron');
+INSERT INTO autoren(autorid, vorname, nachname) values ('96','John', 'Keats');
+INSERT INTO autoren(autorid, vorname, nachname) values ('97','Rudyard', 'Kipling');
+INSERT INTO autoren(autorid, vorname, nachname) values ('98','Oliver', 'Goldsmith');
+INSERT INTO autoren(autorid, vorname, nachname) values ('99','Oscar', 'Wilde');
+INSERT INTO autoren(autorid, vorname, nachname)VALUES ('100','P. G.', 'Wodehouse');
+commit;
+
+select * from autoren;
+
+INSERT INTO verlage(verlagsid, verlagsname)  values (100,'Elsevier');
+INSERT INTO verlage(verlagsid, verlagsname) values (200,'Penguin Group');
+INSERT INTO verlage(verlagsid, verlagsname) values (300,'Pearson Education');
+INSERT INTO verlage(verlagsid, verlagsname) values (400,'Cambridge University Press ');
+INSERT INTO verlage(verlagsid, verlagsname) values (500,'Dorling Kindersley ');
+INSERT INTO verlage(verlagsid, verlagsname) values (301,'AC Barls');
+INSERT INTO verlage(verlagsid, verlagsname) values (302,'Penguin Group');
+INSERT INTO verlage(verlagsid, verlagsname) values (303,'Elsevier_II');
+INSERT INTO verlage(verlagsid, verlagsname) values (304,'Pearson Education');
+INSERT INTO verlage(verlagsid, verlagsname) values (305,'Inc Publication');
+INSERT INTO verlage(verlagsid, verlagsname) values (306,'Embel');
+INSERT INTO verlage(verlagsid, verlagsname) values (307,'Anthoys');
+INSERT INTO verlage(verlagsid, verlagsname) values (308,'Cengage');
+INSERT INTO verlage(verlagsid, verlagsname) values (309,'Wilsey');
+INSERT INTO verlage(verlagsid, verlagsname) values (310,'Mc Graw');
+commit;
+
+select * from verlage;
+
+--AUFGABE-9)
+
+CREATE SEQUENCE autorenseq
+    START WITH 101
+    INCREMENT BY 1
+    NOCACHE;
+
+--AUFGABE-10)
+
+Insert into autoren (autorid,VORNAME,nachname) values (autorenseq.nextval,'&Vorname','&Nachname');
+commit;
+
+select * from autoren;
+
+--AUFGABE-11)
+
+INSERT INTO buecher values (1,'Florentine Tragedy');
+INSERT INTO buecher values (2,'A Vision');
+INSERT INTO buecher values (3,'Citizen of the World');
+INSERT INTO buecher values (4,'The Complete Poetical Works of Oliver');
+INSERT INTO buecher values (5,'Androcles and the Lion');
+INSERT INTO buecher values (6,'An Unsocial Socialist');
+INSERT INTO buecher values (7,'A Thing of Beauty is a Joy Forever');
+INSERT INTO buecher values (8,'Beyond the Pale');
+INSERT INTO buecher values (9,'The Clicking of Cuthbert');
+INSERT INTO buecher values (10,'Bride of Frankenstein');
+INSERT INTO buecher values (11,'Shelley Poetry and Prose');
+INSERT INTO buecher values (12,'War and Peace');
+INSERT INTO buecher values (13,'Invisible Man');
+Insert into buecher values(14, 'The Girl with the dragon Tattoo');
+Insert into buecher values(15, 'Raghuvamsa');
+Insert into buecher values(16, 'Shakuntala');
+Insert into buecher values(17, 'Antony and Cleopatra');
+Insert into buecher values(18, 'Oliver Twist');
+Insert into buecher values(19, 'Introduction to Database');
+Insert into buecher values(20, 'Jungle Book');
+Insert into buecher values(21, 'Paradise lost');
+Insert into buecher values(22, 'Othello');
+Insert into buecher values(23, 'Pickwick Papers');
+Insert into buecher values(24, 'Tempest');
+commit;
+
+select * from buecher;
+
+--AUFGABE12-13)
+
+Insert into buch_zu_autor(autorid, bookid) values(103,13);
+Insert into buch_zu_autor(autorid, bookid) values(101,14);
+Insert into buch_zu_autor(autorid, bookid) values(105,15);
+Insert into buch_zu_autor(autorid, bookid) values(105,16);
+Insert into buch_zu_autor(autorid, bookid) values(102, 17);
+Insert into buch_zu_autor(autorid, bookid) values(108, 18);
+Insert into buch_zu_autor(autorid, bookid) values(107, 19);
+Insert into buch_zu_autor(autorid, bookid) values(104, 20);
+Insert into buch_zu_autor(autorid, bookid) values(106, 21);
+Insert into buch_zu_autor(autorid, bookid) values(102, 22);
+Insert into buch_zu_autor(autorid, bookid) values(108, 23);
+Insert into buch_zu_autor(autorid, bookid) values(102,24);
+insert into buch_zu_autor(autorid, bookid) values(93, 1);
+insert into buch_zu_autor(autorid, bookid) values(93,2);
+insert into buch_zu_autor(autorid, bookid) values(92, 3);
+insert into buch_zu_autor(autorid, bookid) values(92, 4);
+insert into buch_zu_autor(autorid, bookid) values(94, 5);
+insert into buch_zu_autor(autorid, bookid) values(94, 6);
+insert into buch_zu_autor(autorid, bookid) values(98, 7);
+insert into buch_zu_autor(autorid, bookid) values(96, 8);
+insert into buch_zu_autor(autorid, bookid) values(98, 9);
+insert into buch_zu_autor(autorid, bookid) values(96, 10);
+insert into buch_zu_autor(autorid, bookid) values(95, 11);
+insert into buch_zu_autor(autorid, bookid) values(94, 12);
+commit;
+
+select * from buch_zu_autor;
+
+insert into buch_zu_verlag(bookid, verlagsid) values(1,200);
+insert into buch_zu_verlag(bookid, verlagsid) values(2,300);
+insert into buch_zu_verlag(bookid, verlagsid) values(3,100);
+insert into buch_zu_verlag(bookid, verlagsid) values(4,100);
+insert into buch_zu_verlag(bookid, verlagsid) values(5,400);
+insert into buch_zu_verlag(bookid, verlagsid) values(6,400);
+insert into buch_zu_verlag(bookid, verlagsid) values(7,200);
+insert into buch_zu_verlag(bookid, verlagsid) values(8,500);
+insert into buch_zu_verlag(bookid, verlagsid) values(9,500);
+insert into buch_zu_verlag(bookid, verlagsid) values(10,100);
+insert into buch_zu_verlag(bookid, verlagsid) values(11,300);
+insert into buch_zu_verlag(bookid, verlagsid) values(12,200);
+Insert into buch_zu_verlag(bookid, verlagsid) values(13, 301);
+Insert into buch_zu_verlag(bookid, verlagsid) values(15,303);
+Insert into buch_zu_verlag(bookid, verlagsid) values(15,303);
+Insert into buch_zu_verlag(bookid, verlagsid) values(16, 303);
+Insert into buch_zu_verlag(bookid, verlagsid) values(17, 306);
+Insert into buch_zu_verlag(bookid, verlagsid) values(18, 305);
+Insert into buch_zu_verlag(bookid, verlagsid) values(19, 304);
+Insert into buch_zu_verlag(bookid, verlagsid) values(20, 307);
+Insert into buch_zu_verlag(bookid, verlagsid) values(21, 308);
+Insert into buch_zu_verlag(bookid, verlagsid) values(22, 304);
+Insert into buch_zu_verlag(bookid, verlagsid) values(23, 305);
+Insert into buch_zu_verlag(bookid, verlagsid) values(24,304);
+commit;
+
+select * from buch_zu_verlag;
+
+Insert into VERLEIHVORGAENGE  values (501,'20.04.15',1,201);
+Insert into VERLEIHVORGAENGE  values (502, '05.04.15',2,203);
+Insert into VERLEIHVORGAENGE  values (503,'15.12.15',11,202);
+Insert into VERLEIHVORGAENGE  values (504,'25.10.15',4,204);
+Insert into VERLEIHVORGAENGE  values (505,'13.02.16',5,212);
+Insert into VERLEIHVORGAENGE  values (506,'12.08.15',4,209);
+Insert into VERLEIHVORGAENGE  values (507,'10.03.15',12,210);
+Insert into VERLEIHVORGAENGE  values (508,'07.05.15',8,205);
+Insert into VERLEIHVORGAENGE  values (509,'02.01.15',10,209);
+Insert into VERLEIHVORGAENGE  values (510,'15.01.15',11,210);
+Insert into VERLEIHVORGAENGE  values (511,'01.04.16',10,215);
+Insert into VERLEIHVORGAENGE  values (512,'29.02.16',5,213);
+Insert into VERLEIHVORGAENGE  values (513,'13.12.15',9,207);
+Insert into VERLEIHVORGAENGE  values (514,'28.11.15',5,205);
+Insert into VERLEIHVORGAENGE  values (515,'03.01.16',2,214);
+Insert into VERLEIHVORGAENGE  values (516,'21.10.15',3,215);
+Insert into VERLEIHVORGAENGE  values (517,'14.09.17',14,213);
+Insert into VERLEIHVORGAENGE  values (518,'14.01.18',23,202);
+Insert into VERLEIHVORGAENGE  values (519,'18.09.19',11,205);
+Insert into VERLEIHVORGAENGE  values (520,'18.03.20',15,218);
+Insert into VERLEIHVORGAENGE  values (521,'10.11.20',9,220);
+Insert into VERLEIHVORGAENGE  values (522,'14.07.20',23,202);
+Insert into VERLEIHVORGAENGE  values (523,'15.05.19',22,207);
+Insert into VERLEIHVORGAENGE  values (524,'14.06.18',21,202);
+commit;
+
+select * from VERLEIHVORGAENGE;  
+
+--AUFGABE-14) 
+
+SELECT * FROM mitglieder;
+
+SELECT * FROM Buecher;
+
+SELECT * FROM Autoren;
+
+SELECT * FROM Verlage;
+
+SELECT * FROM Verleihvorgaenge;
+
+SELECT * FROM buch_zu_autor;
+
+SELECT * FROM buch_zu_verlag;
+
+--ER-Diagram wurde angesehen.
+
+--Aufgabe-15)
+
+ALTER TABLE Verleihvorgaenge 
+ADD CONSTRAINT FK_Verleihvorgaenge 
+FOREIGN KEY (bookid) REFERENCES Buecher (bookid);
+
+ALTER TABLE Verleihvorgaenge 
+ADD CONSTRAINT FK_Verleihvorgaenge_2 
+FOREIGN KEY (memberid) REFERENCES mitglieder (memberid);
+
+ALTER TABLE buch_zu_autor 
+ADD CONSTRAINT FK_buch_zu_autor
+FOREIGN KEY (bookid) REFERENCES buecher (bookid);
+
+ALTER TABLE buch_zu_autor 
+ADD CONSTRAINT FK_buch_zu_autor_2
+FOREIGN KEY (autorid) REFERENCES autoren (autorid);
+
+ALTER TABLE buch_zu_verlag 
+ADD CONSTRAINT FK_buch_zu_verlag
+FOREIGN KEY (bookid) REFERENCES  buecher (Bookid);
+
+ALTER TABLE buch_zu_verlag 
+ADD CONSTRAINT FK_buch_zu_verlag_2
+FOREIGN KEY (verlagsid) REFERENCES  verlage (verlagsid);
+
+--Aufgabe-16)
+
+CREATE VIEW MitgliederDetails
+AS
+SELECT 
+    m.Vorname, m.Nachname, m.Strasse, m. Plz, m.Ort, b.Titel Titel_der_Buecher 
+from mitglieder m 
+INNER JOIN Verleihvorgaenge v 
+    on (m.memberid = v.memberid) 
+INNER JOIN Buecher b 
+    on (v.bookid = b.bookid);
+
+select * from MitgliederDetails;
+
+--AUFGABE-17)
+
+--Aufgabe-17) 
+SELECT * FROM buecher
+WHERE titel = 'Great Expectations';
+
+SELECT * FROM Verlage
+WHERE verlagsname= 'Inc Publication';
+
+SELECT * FROM Autoren
+WHERE vorname ='Charles';
+
+select* from buecher;
+
+CREATE SEQUENCE bookidseq
+    START WITH 25
+    INCREMENT BY 1
+    NOCACHE;
+
+INSERT INTO buecher VALUES(bookidseq.nextval, 'Great Expectations') ;
+
+INSERT INTO buch_zu_autor VALUES ((select max(bookid) from buecher), (select autorid from autoren where nachname='Dickens')) ;
+
+INSERT INTO buch_zu_verlag(bookid,verlagsid) VALUES((select max(bookid) from buecher), (select verlagsid from verlage where verlagsname='Inc Publication'));
+commit;
+
+--AUFGABE-18)
+
+SELECT memberid FROM Mitglieder where vorname ='Sven' and Nachname='Ottlieb';
+SELECT bookid FROM buecher where titel = 'Jungle Book';
+
+CREATE SEQUENCE Verleihvorgaengeseq
+    START WITH 525
+    INCREMENT BY 1
+    NOCACHE;
+    
+INSERT INTO Verleihvorgaenge VALUES (Verleihvorgaengeseq.nextval, sysdate, (SELECT bookid FROM buecher where titel = 'Jungle Book'), (SELECT memberid FROM Mitglieder where vorname ='Sven' and Nachname='Ottlieb'));
+commit;
+
+select * from Verleihvorgaenge;
+
+--AUFGABE-19)
+
+SELECT m.vorname, m.nachname, b.titel, v.verleihnr, v.verleihdatum from mitglieder m Join verleihvorgaenge v on (v.memberid=m.memberid) 
+join buecher b on (b.bookid=v.bookid) where b.titel = 'Shakuntala'
+
+select * from verleihvorgaenge;
+
+--Aufgabe-20)
+
+select a.nachname Nachname_Autor, b.titel, b.bookid, bza.autorid from autoren a 
+left join buch_zu_autor bza
+    on (bza.autorid = a.autorid) 
+left join buecher b 
+    on (b.bookid=bza.bookid)
+where a.nachname = 'Shakespeare';
+
+--AUFGABE-21)
+
+ALTER TABLE buecher
+        ADD Anzahl_Kopien number(2);
+ 
+ create table hilfstabelle
+ (
+ bookid number(6,0) constraint pk_hilfstabelle primary key,
+ Anzahl_Kopien number(2)
+ );
+ 
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (1, 10);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (2, 6);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (3, 4);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (4, 3);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (5, 8);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (6, 9);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (7, 9);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (8, 2);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (9, 7);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (10,5);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (11,2);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (12,4);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (13,6);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (14,3);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (15,8);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (16,2);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (17,3);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (18,3);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (19,2);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (20,4);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (21,9);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (22,3);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (23,2);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (24,5);
+insert into hilfstabelle (bookid,  Anzahl_Kopien) values (25,5);
+commit;
+ 
+select * from hilfstabelle;
+
+UPDATE buecher b SET Anzahl_Kopien = (select Anzahl_Kopien 
+                                                                FROM hilfstabelle h
+                                                                WHERE h.bookid = b.bookid);
+                                                                
+select * from buecher; 
+
+--AUFGABE-22)
+CREATE OR REPLACE VIEW  Nachfrage
+AS
+SELECT  b.titel, a.Vorname Vorname_autor,  a.Nachname Nachname_autor, NVL(TO_CHAR(v.verleihdatum), '--') Verleihdatum, NVL(m.vorname,'--') Vorname_mitglieder, NVL(m.nachname,'--') Nachname_mitglieder, v.Verlagsname Verlagsname
+FROM buecher b LEFT JOIN verleihvorgaenge v on (b.bookid = v.bookid)
+LEFT OUTER JOIN mitglieder m on (m.memberid = v.memberid)
+LEFT JOIN buch_zu_verlag bzv on (b.bookid=bzv.bookid)
+LEFT JOIN verlage v on (bzv.verlagsid= v.verlagsid)
+LEFT JOIN buch_zu_autor bza on (bza.bookid = b.bookid)
+LEFT OUTER JOIN autoren a on (bza.autorid = a.autorid)
+
+select * from nachfrage;
+
+--Aufgabe-23)
+
+CREATE OR REPLACE VIEW Never_Read
+AS
+SELECT m.Vorname, m.Nachname, m.Memberid,NVL(TO_CHAR( v.Verleihdatum),'--') Verleihdatum
+FROM Mitglieder m LEFT JOIN verleihvorgaenge v on (v.memberid = m.memberid)
+INTERSECT
+SELECT m.Vorname, m.Nachname, m.Memberid, NVL(TO_CHAR( v.Verleihdatum),'--') Verleihdatum
+FROM Mitglieder m LEFT JOIN verleihvorgaenge v on (v.memberid = m.memberid)  where v.verleihdatum is NULL        
+
+select  count(memberid)  from Never_Read; -- 22 Mitglieder
+
+--Aufgabe-24)
+CREATE OR REPLACE VIEW Reader
+AS
+SELECT m.Vorname, m.Nachname, m.Memberid,  NVL(TO_CHAR( v.Verleihdatum),'--') Verleihdatum,  b.titel
+FROM Mitglieder m LEFT JOIN verleihvorgaenge v on (v.memberid = m.memberid)
+LEFT JOIN buecher b on (b.bookid = v.bookid)
+where v.verleihdatum is NOT NULL
+
+SELECT  COUNT(DISTINCT memberid) FROM Reader; --14 Mitglieder
+
+--AUFGABE-25)
+
+select * from verleihvorgaenge;
+
+CREATE SEQUENCE verleihidseq
+ start with 526
+ increment by 1
+ maxvalue 700
+ nocache;
+
+Insert into VERLEIHVORGAENGE  
+    values (verleihidseq.nextval, SYSDATE, (SELECT DISTINCT b.bookid from buecher b FULL OUTER JOIN verleihvorgaenge v on (b.bookid=v.bookid) where b.titel = '&Buchtitel'), 
+                (SELECT memberid from mitglieder b where vorname ='&Vorname' and nachname ='&Nachname'));
+
+select * from verleihvorgaenge;
+
+--AUFGABE-26)
+select * from user_tables;
+
+--AUFGABE-27)
+select * from user_sequences;
+
+--AUFGABE-28)
+CREATE OR REPLACE VIEW Buecher_Liste
+AS
+SELECT b.titel, a.vorname, a.nachname, b.Anzahl_Kopien 
+FROM Buecher b LEFT JOIN buch_zu_Autor bza 
+    on (b.bookid = bza.bookid) 
+left join Autoren a 
+    on (bza.autorid = a.autorid)
+order by 1;
+
+select * from buecher_liste;
+
+--AUFGABE-29)
+
+--(in system)
+
+CREATE USER login_books 
+   IDENTIFIED BY books;
+
+connect login_books/books;
+
+GRANT Orax to login_books;
+GRANT SELECT ON projekt11.Buecher_Liste to Orax;
+
+--(in login_books)
+
+select * from projekt11.Buecher_Liste; --erfolgreich!!!
